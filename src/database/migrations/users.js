@@ -4,5 +4,5 @@ import User from "../models/users.js";
 export const createUserTable = async () => {
     await sequelize.authenticate();
     await User.sync({ alter: true, logging: false });
-    console.log("Users table created successfully🔥🔥🔥🔥🔥🔥");
+    console.log("Users table created or upated successfully🔥🔥🔥🔥🔥🔥");
 }

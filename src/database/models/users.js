@@ -23,15 +23,41 @@ User.init({
         type:DataTypes.STRING,
         allowNull:true
     },
-    createdAt:{
-        type:DataTypes.DATE,
+    password:{
+        type:DataTypes.STRING,
         allowNull:false
     },
-    updatedAt:{
-        type:DataTypes.DATE,
+    role:{
+        type:DataTypes.STRING,
+        enum:['patient','doctor','admin'],
+        defaultValue:'patient',
         allowNull:false
-    }
-
+    },
+    date_of_birth:{
+    type:DataTypes.DATE,
+    allowNull:true
+    },
+    gender:{
+        type:DataTypes.STRING,
+        enum:['male','female','others'],
+    
+    },
+    profile_image:{
+        type:DataTypes.STRING,
+        allowNull:true
+    },
+    status:{
+        type:DataTypes.STRING,
+        enum:['active','inactive','blocked']
+    },
+    emergency_contact:{
+        type:DataTypes.STRING,
+        allowNull:true
+    },
+    location:{
+    type:DataTypes.STRING,
+    allowNull:true,
+}
 },{
     sequelize,
     modelName:'User',
