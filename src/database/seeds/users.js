@@ -27,8 +27,20 @@ export const seedUsers=async()=>{
             location:'kigali',
             emergency_contact:'02936638383',
             password:hashPassword
+          },
+          {
+            fullName:'Dr. MUGISHA',
+            email:'mugisha@gmail.com',
+            phoneNumber:'0788888888',
+            gender:'male',
+            role:'doctor',
+            status:'active',
+            date_of_birth:'15-05-1985',
+            location:'kigali',
+            emergency_contact:'0799999999',
+            password:hashPassword
           }
     ]
     
-    await User.bulkCreate(users);
+    await User.bulkCreate(users, { ignoreDuplicates: true });
 }

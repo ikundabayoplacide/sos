@@ -1,8 +1,15 @@
 import sequelize from "../../config/db.js";
 import User from "./users.js";
+import Appointment from "./appointments.js";
+import DoctorAvailability from "./doctorAvailability.js";
+import Notification from "./notifications.js";
 
-const db={
+const db = {
     sequelize,
-    User
-}
+    User,
+    Appointment,
+    DoctorAvailability,
+    Notification
+};
+
 export default db;
