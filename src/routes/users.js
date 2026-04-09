@@ -1,12 +1,13 @@
 import express from 'express';
-import { getAllUsers,singleUser,createUser,updateUser,deleteUser } from '../controller/users.js';
+import { getAllUsers,singleUser,updateUser,deleteUser, createUser } from '../controller/users.js';
+import protect from '../middleware/auth.js';
 
 const UserRoutes = express.Router();
-UserRoutes.get("/getAllUsers",getAllUsers);
-UserRoutes.post("/createUser",createUser);
-UserRoutes.get("/getSingleUser/:id",singleUser);
-UserRoutes.put("/updateUser/:id",updateUser);
-UserRoutes.delete("/removeUser/:id",deleteUser);
+UserRoutes.get("/api/getAllUsers",protect,getAllUsers);
+UserRoutes.post("/api/createUser",createUser);
+UserRoutes.get("/api/getSingleUser/:id",protect,singleUser);
+UserRoutes.put("/api/updateUser/:id",protect,updateUser);
+UserRoutes.delete("/api/removeUser/:id",protect,deleteUser);
 
 
 export default UserRoutes;
