@@ -25,21 +25,21 @@ export const singleUser=async(req,res)=>{
     }
 }
 
-//create user
+//Create user
 export const createUser=async(req,res)=>{
-    try {
-        const {password,...useData}=req.body;
-        const hashPassword=await bcrypt.hash(password,10);
-        const newUser=await User.create({
-            ...useData,
-            password:hashPassword
-        });
-        res.status(201).json(newUser);
+        try {
+        const { password, ...userData } = req.body;
+        const existing = await User.findOne({ where: { email: userData.email } });
+        if (existing) return res.status(400).json({ message: 'Email already in use' });
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user = await User.create({ ...userData, password: hashedPassword });
+        res.status(201).json({ message: 'User registered successfully', user });
     } catch (error) {
-        res.status(500).json({error:error.message})
-        
+        res.status(500).json({ error: error.message });
     }
 }
+
 //Update User
 export const updateUser=async(req,res)=>{
     try {
