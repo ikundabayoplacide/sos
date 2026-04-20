@@ -263,6 +263,18 @@ const swaggerDefinition = {
                 }
             }
         },
+        "/api/availability/{dayOfWeek}/toggle": {
+            patch: {
+                tags: ["Availability"],
+                summary: "Doctor toggles availability for a specific day (true becomes false, false becomes true)",
+                security: [{ bearerAuth: [] }],
+                parameters: [{ in: "path", name: "dayOfWeek", required: true, schema: { type: "string" }, example: "Monday" }],
+                responses: {
+                    200: { description: "Availability toggled successfully" },
+                    404: { description: "Slot not found" }
+                }
+            }
+        },
         "/api/availability/{id}": {
             put: {
                 tags: ["Availability"],

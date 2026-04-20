@@ -89,3 +89,23 @@ export const getAllDoctorsAvailability = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+//doctor update if he is available
+export const updateDoctorAvailability = async (req, res) => {
+    try {
+        const doctorId = req.user.id;
+        // Find the doctor's availability slot
+        const slot = await DoctorAvailability.findOne({
+            where: { doctorId, dayOfWeek: req.params.dayOfWeek }
+        });
+        if (!slot) {
+            return res.status(404).json({ message: "Availability slot not found" });
+        }
+        // Toggle the availability status
+        await slot.update({ isAvailable: !slot.isAvailable });
+
+        res.status(200).json({ message: "Doctor availability updated successfully", slot });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
