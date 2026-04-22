@@ -3,7 +3,7 @@ import { getAllUsers,singleUser,updateUser,deleteUser, createUser } from '../con
 import protect from '../middleware/auth.js';
 
 const UserRoutes = express.Router();
-UserRoutes.get("/api/getAllUsers",protect,getAllUsers);
+UserRoutes.get("/api/getAllUsers",getAllUsers);
 UserRoutes.post("/api/createUser",createUser);
 UserRoutes.get("/api/getSingleUser/:id",protect,singleUser);
 UserRoutes.put("/api/updateUser/:id",protect,updateUser);
