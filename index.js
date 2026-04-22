@@ -22,16 +22,17 @@ app.use(NotificationRoutes);
 
 
 sequelize.authenticate()
-.then(() => sequelize.sync())
-.then(() => {
-    app.listen(PORT, () => {
-        console.log(`Your database is running🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥`);
-        console.log(`Server is running on http://localhost:${PORT}`);
-        console.log(`Api documentation is available on http://localhost:${PORT}/api-docs`);
-
+    .then(() => sequelize.sync())
+    .then(() => {
+        if (process.env.NODE_ENV !== "production") {
+            app.listen(PORT, () => {
+                console.log(`Server is running on http://localhost:${PORT}`);
+                console.log(`Api documentation is available on http://localhost:${PORT}/api-docs`);
+            });
+        }
+    })
+    .catch((err) => {
+        console.error("Unable to connect to the database:", err);
     });
-})
-.catch((err) => {
-    console.error("Unable to connect to the database:", err);
-    process.exit(1);
-});
+
+export default app;
