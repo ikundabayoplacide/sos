@@ -21,16 +21,15 @@ app.use(AppointmentRoutes);
 app.use(NotificationRoutes);
 
 
+sequelize.authenticate()
+    .then(() => sequelize.sync())
+    .catch((err) => console.error("Unable to connect to the database:", err));
+
 if (process.env.NODE_ENV !== "production") {
-    sequelize.authenticate()
-        .then(() => sequelize.sync())
-        .then(() => {
-            app.listen(PORT, () => {
-                console.log(`Server is running on http://localhost:${PORT}`);
-                console.log(`Api docs: http://localhost:${PORT}/api-docs`);
-            });
-        })
-        .catch((err) => console.error("Unable to connect to the database:", err));
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+        console.log(`Api docs: http://localhost:${PORT}/api-docs`);
+    });
 }
 
 export default app;
