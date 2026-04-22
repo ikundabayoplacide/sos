@@ -10,7 +10,6 @@ import AppointmentRoutes from "./src/routes/appointments.js";
 import NotificationRoutes from "./src/routes/notifications.js";
 import "./src/database/models/association.js";
 const app = express();
-const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
@@ -22,16 +21,11 @@ app.use(NotificationRoutes);
 
 
 
+const PORT = process.env.PORT || 3000;
+
 sequelize.authenticate()
     .then(() => sequelize.sync())
+    .then(() => app.listen(PORT, () => console.log(`Server running on port ${PORT}`)))
     .catch((err) => console.error("Unable to connect to the database:", err));
-
-// Only listen locally
-if (process.env.NODE_ENV !== "production") {
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
-    });
-}
 
 export default app;
