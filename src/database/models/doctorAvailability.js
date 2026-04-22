@@ -1,6 +1,5 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../../config/db.js";
-import User from "./users.js";
 
 class DoctorAvailability extends Model {}
 
@@ -20,14 +19,6 @@ DoctorAvailability.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-    startTime: {
-        type: DataTypes.TIME,
-        allowNull: false
-    },
-    endTime: {
-        type: DataTypes.TIME,
-        allowNull: false
-    },
     isAvailable: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
@@ -39,7 +30,5 @@ DoctorAvailability.init({
     timestamps: true
 });
 
-DoctorAvailability.belongsTo(User, { as: 'doctor', foreignKey: 'doctorId' });
-User.hasMany(DoctorAvailability, { as: 'availability', foreignKey: 'doctorId' });
 
 export default DoctorAvailability;

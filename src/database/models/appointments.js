@@ -1,6 +1,5 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../../config/db.js";
-import User from "./users.js";
 
 class Appointment extends Model {}
 
@@ -45,9 +44,5 @@ Appointment.init({
     timestamps: true
 });
 
-Appointment.belongsTo(User, { as: 'patient', foreignKey: 'patientId' });
-Appointment.belongsTo(User, { as: 'doctor', foreignKey: 'doctorId' });
-User.hasMany(Appointment, { as: 'patientAppointments', foreignKey: 'patientId' });
-User.hasMany(Appointment, { as: 'doctorAppointments', foreignKey: 'doctorId' });
 
 export default Appointment;

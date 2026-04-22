@@ -39,6 +39,18 @@ export const seedUsers=async()=>{
             location:'kigali',
             emergency_contact:'0799999999',
             password:hashPassword
+          },
+          {
+            fullName:"Administrator",
+            email:"admin@gmail.com",
+            phoneNumber:'0788888888',
+            gender:'male',
+            role:'admin',
+            status:'active',
+            date_of_birth:'15-05-1985',
+            location:'kigali',
+            emergency_contact:'0799999999',
+            password:hashPassword
           }
     ]
     
