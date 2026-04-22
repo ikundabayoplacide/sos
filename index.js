@@ -21,14 +21,16 @@ app.use(AppointmentRoutes);
 app.use(NotificationRoutes);
 
 
+
 sequelize.authenticate()
     .then(() => sequelize.sync())
     .catch((err) => console.error("Unable to connect to the database:", err));
 
+// Only listen locally
 if (process.env.NODE_ENV !== "production") {
+    const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {
         console.log(`Server is running on http://localhost:${PORT}`);
-        console.log(`Api docs: http://localhost:${PORT}/api-docs`);
     });
 }
 
